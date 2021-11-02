@@ -12,6 +12,14 @@ import { DepartmentComponent } from './modules/hr/components/department/departme
 import {HrModule} from "./modules/hr/hr.module";
 import {TnlModule} from "./modules/tnl/tnl.module";
 import {HttpClientModule} from "@angular/common/http";
+import { LoginComponent } from './modules/components/login/login.component';
+import {MatTableModule} from "@angular/material/table";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -19,17 +27,25 @@ import {HttpClientModule} from "@angular/common/http";
     LeaveTypeComponent,
     LeaveAppComponent,
     EmployeeComponent,
-    DepartmentComponent
+    DepartmentComponent,
+    LoginComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    NgbModule,
-    HrModule,
-    TnlModule,
-    HttpClientModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        NgbModule,
+        HrModule,
+        TnlModule,
+        HttpClientModule,
+        MatTableModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatCheckboxModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
