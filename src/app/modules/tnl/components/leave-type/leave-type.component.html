@@ -1,1 +1,91 @@
-<p>leave-type works!</p>
+<div *ngIf="message">
+  <p>
+    <ngb-alert [dismissible]="false">
+      <strong>{{message}}</strong>
+    </ngb-alert>
+  </p>
+</div>
+
+<div class="section">
+  <h2>Designation Form</h2>
+
+  <form [formGroup]="leaveTypeForm" (ngSubmit)=" submit()">
+
+    <mat-form-field>
+      <mat-label>ID</mat-label>
+      <input formControlName="id" matInput readonly>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input formControlName="name" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Allow Leave/Month</mat-label>
+      <input formControlName="allowNoOfLeaveMonth" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>allow Leave/Yearly</mat-label>
+      <input formControlName="allowNoOfLeaveYearly" matInput>
+    </mat-form-field>
+    <mat-checkbox formControlName="active">Active</mat-checkbox>
+    <br/>
+    <button type="submit"  [disabled]="!leaveTypeForm.valid" mat-raised-button color="primary">Submit</button>
+    <button type="button" (click)="clear()" mat-stroked-button color="accent">Clear</button>
+  </form>
+</div>
+<br>
+
+<div class="div-section">
+
+  <h2>Leave-Type List</h2>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--id Column-->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> No.</th>
+      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> No.</th>
+      <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="allowNoOfLeaveMonth">
+      <th mat-header-cell *matHeaderCellDef> Allow Leave/Month</th>
+      <td mat-cell *matCellDef="let row"> {{row.allowNoOfLeaveMonth}} </td>
+    </ng-container>
+
+    <!-- Active Column -->
+    <ng-container matColumnDef="allowNoOfLeaveYearly">
+      <th mat-header-cell *matHeaderCellDef> Allow Leave/Year</th>
+      <td mat-cell *matCellDef="let row"> {{row.allowNoOfLeaveYearly}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="active">
+      <th mat-header-cell *matHeaderCellDef> Active</th>
+      <td mat-cell *matCellDef="let row"> {{row.active}} </td>
+    </ng-container>
+
+    <!--Action Column-->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action</th>
+      <td mat-cell *matCellDef="let row">
+
+        <button (click)="edit(row)" mat-fab color="accent" aria-label="Example icon button with a edit icon a edit icon a edit icon">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button mat-fab (click)="delete(row)" color="warn" aria-label="Example icon button with a delete icon a delete icon">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Define display cloumn -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</div>

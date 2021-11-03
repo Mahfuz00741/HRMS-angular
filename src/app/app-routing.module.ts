@@ -5,6 +5,7 @@ import {LoginComponent} from "./modules/components/login/login.component";
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'hr', loadChildren: () => import('./modules/hr/hr.module').then(m => m.HrModule)},
+  {path: 'tnl', loadChildren: () => import('./modules/tnl/tnl.module').then(m => m.TnlModule)},
 ];
 
 @NgModule({
