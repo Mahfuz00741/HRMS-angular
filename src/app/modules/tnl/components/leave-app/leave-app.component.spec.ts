@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LeaveAppComponent } from './leave-app.component';
+import { LeaveAppAdminComponent } from './leave-app-admin.component';
 
 describe('LeaveAppComponent', () => {
-  let component: LeaveAppComponent;
-  let fixture: ComponentFixture<LeaveAppComponent>;
+  let component: LeaveAppAdminComponent;
+  let fixture: ComponentFixture<LeaveAppAdminComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LeaveAppComponent ]
+      declarations: [ LeaveAppAdminComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LeaveAppComponent);
+    fixture = TestBed.createComponent(LeaveAppAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

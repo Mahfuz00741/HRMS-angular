@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LeaveTypeComponent } from './modules/tnl/components/leave-type/leave-type.component';
-import { LeaveAppComponent } from './modules/tnl/components/leave-app/leave-app.component';
+import { LeaveAppAdminComponent } from './modules/tnl/components/leave-app/leave-app-admin.component';
 import { EmployeeComponent } from './modules/hr/components/employee/employee.component';
 import { DepartmentComponent } from './modules/hr/components/department/department.component';
 import {HrModule} from "./modules/hr/hr.module";
@@ -25,7 +25,7 @@ import {MatIconModule} from "@angular/material/icon";
   declarations: [
     AppComponent,
     LeaveTypeComponent,
-    LeaveAppComponent,
+    LeaveAppAdminComponent,
     EmployeeComponent,
     DepartmentComponent,
     LoginComponent

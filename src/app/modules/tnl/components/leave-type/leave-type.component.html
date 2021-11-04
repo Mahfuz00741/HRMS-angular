@@ -7,7 +7,7 @@
 </div>
 
 <div class="section">
-  <h2>Designation Form</h2>
+  <h6>Designation Form</h6>
 
   <form [formGroup]="leaveTypeForm" (ngSubmit)=" submit()">
 
@@ -37,7 +37,7 @@
 
 <div class="div-section">
 
-  <h2>Leave-Type List</h2>
+  <h6>Leave-Type List</h6>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!--id Column-->
@@ -89,3 +89,5 @@
   </table>
 
 </div>
+<br>
+<a routerLink="/leaveAppAdmin">Leave App Admin</a>

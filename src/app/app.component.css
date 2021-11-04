@@ -1,0 +1,16 @@
+.navbar-brand{
+  background: darkslategray;
+  color: darkgray;
+}
+
+.modify{
+  background: darkslategray;
+}
+.modify ul li a{
+  color: white;
+}
+
+.modify ul li a:hover{
+  color: black;
+  background: forestgreen;
+}

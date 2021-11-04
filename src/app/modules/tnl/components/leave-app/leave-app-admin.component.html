@@ -1,0 +1,146 @@
+<!--<div *ngIf="message">
+  <p>
+    <ngb-alert [dismissible]="false">
+      <strong>{{message}}</strong>
+    </ngb-alert>
+  </p>
+</div>-->
+
+<div class="section">
+  <h6>Designation Form</h6>
+
+  <form [formGroup]="leaveAppForm" (ngSubmit)=" submit()">
+
+    <mat-form-field>
+      <mat-label>ID</mat-label>
+      <input formControlName="id" matInput readonly>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>App Date</mat-label>
+      <input formControlName="appDate" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>From Date</mat-label>
+      <input formControlName="fromDate" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>To Date</mat-label>
+      <input formControlName="toDate" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Entry</mat-label>
+      <input formControlName="entry" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Reason</mat-label>
+      <input formControlName="reason" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Employee Id</mat-label>
+      <input formControlName="employeeId" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Leave Type Id</mat-label>
+      <input formControlName="leaveTypeId" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>On Leave Contact No</mat-label>
+      <input formControlName="onLeaveContactNo" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Responsible Person Id</mat-label>
+      <input formControlName="responsiblePersonId" matInput>
+    </mat-form-field>
+    <mat-checkbox formControlName="active">Active</mat-checkbox>
+    <mat-form-field>
+      <mat-label>Remark</mat-label>
+      <input formControlName="remark" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Status</mat-label>
+      <input formControlName="status" matInput>
+    </mat-form-field>
+    <br/>
+    <button type="submit" mat-raised-button color="primary">Submit</button>
+    <button type="button" (click)="clear()" mat-stroked-button color="accent">Clear</button>
+  </form>
+</div>
+<br>
+
+<div class="div-section">
+
+  <h6>Leave-App List</h6>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--id Column-->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> No.</th>
+      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="appDate">
+      <th mat-header-cell *matHeaderCellDef> Application Date.</th>
+      <td mat-cell *matCellDef="let row"> {{row.appDate}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="fromDate">
+      <th mat-header-cell *matHeaderCellDef> From Date</th>
+      <td mat-cell *matCellDef="let row"> {{row.fromDate}} </td>
+    </ng-container>
+
+    <!-- Active Column -->
+    <ng-container matColumnDef="toDate">
+      <th mat-header-cell *matHeaderCellDef> To Date</th>
+      <td mat-cell *matCellDef="let row"> {{row.toDate}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="entry">
+      <th mat-header-cell *matHeaderCellDef> Entry</th>
+      <td mat-cell *matCellDef="let row"> {{row.entry}} </td>
+    </ng-container>
+    <ng-container matColumnDef="employeeId">
+      <th mat-header-cell *matHeaderCellDef> Employee Id</th>
+      <td mat-cell *matCellDef="let row"> {{row.employeeId}} </td>
+    </ng-container>
+    <ng-container matColumnDef="onLeaveContactNo">
+      <th mat-header-cell *matHeaderCellDef> On Leave Contact No</th>
+      <td mat-cell *matCellDef="let row"> {{row.onLeaveContactNo}} </td>
+    </ng-container>
+    <ng-container matColumnDef="active">
+      <th mat-header-cell *matHeaderCellDef> Active</th>
+      <td mat-cell *matCellDef="let row"> {{row.active}} </td>
+    </ng-container>
+    <ng-container matColumnDef="remark">
+      <th mat-header-cell *matHeaderCellDef> Remark</th>
+      <td mat-cell *matCellDef="let row"> {{row.remark}} </td>
+    </ng-container>
+    <ng-container matColumnDef="reason">
+      <th mat-header-cell *matHeaderCellDef> Reason</th>
+      <td mat-cell *matCellDef="let row"> {{row.reason}} </td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> status</th>
+      <td mat-cell *matCellDef="let row"> {{row.status}} </td>
+    </ng-container>
+
+    <!--Action Column-->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action</th>
+      <td mat-cell *matCellDef="let row">
+
+        <button mat-fab (click)="edit(row)" color="accent" aria-label="Example icon button with a edit icon a edit icon a edit icon">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button mat-fab (click)="delete(row)" color="warn" aria-label="Example icon button with a delete icon a delete icon">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <!-- Define display cloumn -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</div>
