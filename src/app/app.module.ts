@@ -20,6 +20,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
+import { UserComponent } from './modules/admin/components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {MatIconModule} from "@angular/material/icon";
     LeaveAppAdminComponent,
     EmployeeComponent,
     DepartmentComponent,
-    LoginComponent
+    LoginComponent,
+    UserComponent,
   ],
     imports: [
         BrowserModule,
