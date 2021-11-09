@@ -1,11 +1,10 @@
-.list{
-  background: darkolivegreen;
+.div-section{
+  width: 100%;
+  float: left;
   color: navajowhite;
+  background: darkgreen;
 }
-
-.section h6{
-  background: darkolivegreen;
-  color: navajowhite;
+.div-section h6{
   text-align: center;
 }
 

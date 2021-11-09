@@ -35,9 +35,9 @@ export class LeaveTypeComponent implements OnInit {
       {
         id: [],
         name: ['', [Validators.required]],
-        allowNoOfLeaveMonth: ['4', [Validators.required]],
-        allowNoOfLeaveYearly: ['40', [Validators.required]],
-        active: ['', [Validators.required]],
+        allowNoOfLeaveMonth: ['', [Validators.required]],
+        allowNoOfLeaveYearly: ['', [Validators.required]],
+        active: [false, [Validators.required]],
       }
     )
   }

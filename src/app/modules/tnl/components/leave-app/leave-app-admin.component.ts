@@ -39,15 +39,15 @@ export class LeaveAppAdminComponent implements OnInit {
         appDate: ['2021-11-03', [Validators.required]],
         fromDate: ['2021-12-12', [Validators.required]],
         toDate: ['2022-01-03', [Validators.required]],
-        entry: ['ADMIN', [Validators.required]],
-        reason: ['Fever'],
+        entry: ['', [Validators.required]],
+        reason: [''],
         employeeId: ['', [Validators.required]],
         leaveTypeId: ['', Validators.required],
         onLeaveContactNo: ['', [Validators.required]],
         responsiblePersonId: ['', [Validators.required]],
-        active: ['', [Validators.required]],
-        remark: [],
-        status: ['APPROVED'],
+        active: [false, [Validators.required]],
+        remark: [''],
+        status: [''],
       }
     )
   }

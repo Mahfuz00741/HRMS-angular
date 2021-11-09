@@ -3,6 +3,8 @@ import {MatTableDataSource} from "@angular/material/table";
 import {Department} from "../../models/department";
 import {DepartmentService} from "../../services/department.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {EmployeeService} from "../../services/employee.service";
+import {Employee} from "../../models/employee";
 
 @Component({
   selector: 'app-department',
@@ -16,16 +18,19 @@ export class DepartmentComponent implements OnInit {
   departmentForm: FormGroup;
   model: Department = new Department();
   message: string;
+  empList: Employee[] = new Array();
 
   constructor(
     private service: DepartmentService,
     private formBuilder: FormBuilder,
+    private empService: EmployeeService,
   ) {
   }
 
   ngOnInit(): void {
     this.getAll();
     this.initializeFormValue();
+    this.getEmp();
   }
 
   initializeFormValue(): any {
@@ -34,8 +39,8 @@ export class DepartmentComponent implements OnInit {
         id: [],
         code: ['', [Validators.required]],
         name: ['', [Validators.required]],
-        active: ['', [Validators.required]],
-        headOfId: ['1', [Validators.required]],
+        active: [false, [Validators.required]],
+        headOfId: ['', [Validators.required]],
       }
     )
   }
@@ -64,6 +69,14 @@ export class DepartmentComponent implements OnInit {
       )
     }
     else{
+      if(this.isCodeUnique(this.departmentForm.value.code)){
+        this.message = "Department code already exits..!"
+        console.log("Department code already exits..!")
+      }
+      if(this.isNameUnique(this.departmentForm.value.code)){
+        this.message = "Department name already exits..!"
+        console.log("Department name already exits..!")
+      }
       this.generateModel(true);
       this.service.create(this.model).subscribe(
         res =>{
@@ -86,6 +99,14 @@ export class DepartmentComponent implements OnInit {
     )
   }
 
+  getEmp(): any{
+    this.empService.getList().subscribe(
+      res => {
+        this.empList = res.content;
+      }
+    )
+  }
+
   delete(row: Department): any{
     this.service.delete(row.id).subscribe(
       res =>{
@@ -100,7 +121,7 @@ export class DepartmentComponent implements OnInit {
 
   clear(): any {
     this.initializeFormValue();
-    this.message = ""
+    this.message = "";
   }
 
   edit(row: Department): any{
@@ -113,5 +134,23 @@ export class DepartmentComponent implements OnInit {
         headOfId: [row.headOfId, [Validators.required]],
       }
     )
+  }
+
+  isCodeUnique(code: string): boolean{
+    for(let dept of this.deptList){
+      if(dept.code == code){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  isNameUnique(name: string): boolean {
+    for (let dept of this.deptList) {
+      if (dept.name == name) {
+        return false;
+      }
+    }
+    return true;
   }
 }

@@ -1,13 +1,46 @@
-<!--<div *ngIf="message">
+<!--navigation bar-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">TIME&LEAVE</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse modify" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/admin/user">User</a>
+      </li>
+      <li class="nav-item">
+      <li class="nav-item">
+        <a class="nav-link" href="/hr">HR</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/tnl">TNL</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <a class="nav-link logout" routerLink="/">Logout</a>
+    </form>
+  </div>
+</nav>
+<!--/navigation bar-->
+
+<div *ngIf="message">
   <p>
     <ngb-alert [dismissible]="false">
       <strong>{{message}}</strong>
     </ngb-alert>
   </p>
-</div>-->
+</div>
 
 <div class="section">
-  <h6>Designation Form</h6>
+  <h6>Leave Application Creation Form</h6>
 
   <form [formGroup]="leaveAppForm" (ngSubmit)=" submit()">
 
@@ -17,20 +50,24 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>App Date</mat-label>
-      <input formControlName="appDate" matInput>
+      <input type="date" formControlName="appDate" matInput>
     </mat-form-field>
     <mat-form-field>
       <mat-label>From Date</mat-label>
-      <input formControlName="fromDate" matInput>
+      <input type="date" formControlName="fromDate" matInput>
     </mat-form-field>
     <mat-form-field>
       <mat-label>To Date</mat-label>
-      <input formControlName="toDate" matInput>
+      <input type="date" formControlName="toDate" matInput>
     </mat-form-field>
+
     <mat-form-field>
-      <mat-label>Entry</mat-label>
-      <input formControlName="entry" matInput>
+      <mat-label>Choose Entry Type</mat-label>
+    <mat-select>
+      <mat-option value="ADMIN">ADMIN</mat-option>
+    </mat-select>
     </mat-form-field>
+
     <mat-form-field>
       <mat-label>Reason</mat-label>
       <input formControlName="reason" matInput>
@@ -51,7 +88,6 @@
       <mat-label>Responsible Person Id</mat-label>
       <input formControlName="responsiblePersonId" matInput>
     </mat-form-field>
-    <mat-checkbox formControlName="active">Active</mat-checkbox>
     <mat-form-field>
       <mat-label>Remark</mat-label>
       <input formControlName="remark" matInput>
@@ -60,16 +96,17 @@
       <mat-label>Status</mat-label>
       <input formControlName="status" matInput>
     </mat-form-field>
+    <mat-checkbox formControlName="active">Active</mat-checkbox>
     <br/>
-    <button type="submit" mat-raised-button color="primary">Submit</button>
+    <button type="submit" [disabled]="!leaveAppForm.valid" mat-raised-button color="primary">Submit</button>
     <button type="button" (click)="clear()" mat-stroked-button color="accent">Clear</button>
   </form>
 </div>
 <br>
 
-<div class="div-section">
+<div class="section list">
 
-  <h6>Leave-App List</h6>
+  <h6>Leave Application List</h6>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!--id Column-->

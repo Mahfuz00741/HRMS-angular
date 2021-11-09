@@ -1,3 +1,89 @@
+<!--navigation bar-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand">TIME&LEAVE</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse modify" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/admin/user">User</a>
+      </li>
+      <li class="nav-item">
+      <li class="nav-item">
+        <a class="nav-link" href="/hr">HR</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/tnl">TNL</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <a class="nav-link logout" routerLink="/">Logout</a>
+    </form>
+  </div>
+</nav>
+<!--/navigation bar-->
+
+<div *ngIf="message">
+  <p>
+    <ngb-alert [dismissible]="false">
+      <strong>{{message}}</strong>
+    </ngb-alert>
+  </p>
+</div>
+
+<div class="section">
+  <h6>User Creation Form</h6>
+
+  <form [formGroup]="userForm" (ngSubmit)=" submit()">
+
+    <mat-form-field>
+      <mat-label>ID</mat-label>
+      <input formControlName="id" matInput readonly>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Photo</mat-label>
+      <input formControlName="photo" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Code</mat-label>
+      <input formControlName="code" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input formControlName="name" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input formControlName="email" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Mobile No</mat-label>
+      <input formControlName="mobileNo" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input formControlName="password" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Roles</mat-label>
+      <input formControlName="role" readonly matInput>
+    </mat-form-field>
+    <mat-checkbox formControlName="active">Active</mat-checkbox>
+    <br/>
+    <button type="submit" [disabled]="!userForm.valid" mat-raised-button color="primary">Submit</button>
+    <button type="button" (click)="clear()" mat-stroked-button color="accent">Clear</button>
+  </form>
+</div>
+<br>
+
 
 <div class="div-section">
 
@@ -6,50 +92,45 @@
 
     <!--id Column-->
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <th mat-header-cell *matHeaderCellDef> No.</th>
       <td mat-cell *matCellDef="let row"> {{row.id}} </td>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="code">
-      <th mat-header-cell *matHeaderCellDef> code </th>
+      <th mat-header-cell *matHeaderCellDef> code</th>
       <td mat-cell *matCellDef="let row"> {{row.code}} </td>
     </ng-container>
 
     <!-- Active Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> name </th>
+      <th mat-header-cell *matHeaderCellDef> name</th>
       <td mat-cell *matCellDef="let row"> {{row.name}} </td>
     </ng-container>
     <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> email </th>
+      <th mat-header-cell *matHeaderCellDef> email</th>
       <td mat-cell *matCellDef="let row"> {{row.email}} </td>
     </ng-container>
     <ng-container matColumnDef="mobileNo">
-      <th mat-header-cell *matHeaderCellDef> mobileNo </th>
+      <th mat-header-cell *matHeaderCellDef> mobileNo</th>
       <td mat-cell *matCellDef="let row"> {{row.mobileNo}} </td>
     </ng-container>
     <ng-container matColumnDef="active">
-      <th mat-header-cell *matHeaderCellDef> active </th>
+      <th mat-header-cell *matHeaderCellDef> active</th>
       <td mat-cell *matCellDef="let row"> {{row.active}} </td>
-    </ng-container>
-    <ng-container matColumnDef="roles">
-      <th mat-header-cell *matHeaderCellDef> roles </th>
-      <td mat-cell *matCellDef="let row"> {{row.roles}} </td>
     </ng-container>
 
     <!--Action Column-->
     <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <th mat-header-cell *matHeaderCellDef> Action</th>
       <td mat-cell *matCellDef="let row">
 
-        <button mat-fab color="accent" aria-label="Example icon button with a edit icon">
+        <button mat-fab (click)="edit(row)" color="accent" aria-label="Example icon button with a edit icon">
           <mat-icon>edit</mat-icon>
         </button>
-
-        <button mat-fab color="warn" aria-label="Example icon button with a delete icon">
-          <mat-icon>delete</mat-icon>
-        </button>
+        <!-- <button mat-fab color="warn" aria-label="Example icon button with a delete icon">
+           <mat-icon>delete</mat-icon>
+         </button>-->
       </td>
     </ng-container>
 

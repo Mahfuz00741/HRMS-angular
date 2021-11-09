@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand">TIME&LEAVE</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse modify" id="navbarSupportedContent">
+    <a class="nav-link">Login</a>
+  </div>
+</nav>
+
+
+<div *ngIf="message">
+  <p>
+    <ngb-alert [dismissible]="false">
+      <strong>{{message}}</strong>
+    </ngb-alert>
+  </p>
+</div>
+
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Log in</mat-card-title>
+    </mat-card-header>
+
+    <form class="example-form" [formGroup]="loginForm" (ngSubmit)="submit()">
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput formControlName="loginId" placeholder="Email/Code/Phone No">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput formControlName="password" placeholder="Password">
+        </mat-form-field>
+      </mat-card-content>
+      <button type="submit" mat-stroked-button [disabled]="!loginForm.valid" color="accent" class="btn-block">Log in</button>
+      <div class="signup">
+        <span>Don't have an account?</span>
+        <a routerLink="/registration">Register Here</a>
+      </div>
+    </form>
+  </mat-card>
+
+</div>

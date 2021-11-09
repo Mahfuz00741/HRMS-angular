@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { AdminRoutingModule } from './admin-routing.module';
+import {AdminRoutingModule} from './admin-routing.module';
 import {MatTableModule} from "@angular/material/table";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
@@ -9,7 +9,9 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -19,4 +21,5 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     MatFormFieldModule,
   ]
 })
-export class AdminModule { }
+export class AdminModule {
+}

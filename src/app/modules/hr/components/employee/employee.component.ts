@@ -4,6 +4,9 @@ import {Employee} from "../../models/employee";
 import {EmployeeService} from "../../services/employee.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Department} from "../../models/department";
+import {Observable} from "rxjs";
+import {DepartmentService} from "../../services/department.service";
+import {DesignationService} from "../../services/designation.service";
 import {Designation} from "../../models/designation";
 
 @Component({
@@ -15,41 +18,48 @@ export class EmployeeComponent implements OnInit {
 
   dataSource: MatTableDataSource<Employee> = new MatTableDataSource();
   empList: Employee [] = new Array();
-  displayedColumns = ['id', 'code', 'name', 'fatherName', 'dob', 'doj', 'nid',
+  displayedColumns = ['id', 'code', 'name', 'userId', 'dob', 'doj', 'nid',
   'gender', 'email', 'mobileNo', 'active', 'action'];
   employeeForm: FormGroup;
   message: string;
   model: Employee = new Employee();
+  genders: any = ['MALE', 'FEMALE', 'OTHERS'];
+  deptList: Department[] = new Array();
+  desgList: Designation[] = new Array();
 
   constructor(
     private service: EmployeeService,
     private formBuilder: FormBuilder,
+    private deptService: DepartmentService,
+    private designationService: DesignationService,
   ) { }
 
   ngOnInit(): void {
+    this.getDept();
     this.initializeFormValue();
     this.getAll();
+    this.getDesg();
   }
 
   initializeFormValue(): any{
     this.employeeForm = this.formBuilder.group(
       {
         id: [],
-        photo: ['photo'],
+        photo: [''],
         code: ['', [Validators.required]],
         name: ['',[Validators.required]],
         fatherName: ['', [Validators.required]],
         dob: ['2020-10-10', [Validators.required]],
         doj: ['2021-10-30', [Validators.required]],
         nid: ['', [Validators.required]],
-        gender: ['MALE', [Validators.required]],
-        email: ['', [Validators.required]],
+        gender: ['', [Validators.required]],
+        email: ['', [Validators.required, Validators.email]],
         mobileNo: ['', [Validators.required]],
         active: ['', [Validators.required]],
         userId: ['', [Validators.required]],
-        deptId: ['1', [Validators.required]],
-        desgId: ['1', [Validators.required]],
-        supervisorId: ['1', [Validators.required]],
+        deptId: ['', [Validators.required]],
+        desgId: ['', [Validators.required]],
+        supervisorId: ['', [Validators.required]],
       }
     )
   }
@@ -94,17 +104,43 @@ export class EmployeeComponent implements OnInit {
         res => {
           this.getAll();
           this.initializeFormValue();
-          this.message = "Updated"
+          this.message = "Updated";
         }
       )
     }
     else{
+      if (!this.isCodeUnique(this.employeeForm.value.code)) {
+        this.message = "Code already used";
+        console.log("Code already used");
+        return;
+      }
+      if (!this.isNidUnique(this.employeeForm.value.nid)) {
+        this.message = "NID already used";
+        console.log("NID already used");
+        return;
+      }
+      if (!this.isEmailUnique(this.employeeForm.value.email)) {
+        this.message = "Email already used";
+        console.log("Email already used");
+        return;
+      }
+      if (!this.isMobileNoUnique(this.employeeForm.value.mobileNo)) {
+        this.message = "Mobile number already used";
+        console.log("Mobile number already used");
+        return;
+      }
+
+      if (!this.isUserIdUnique(this.employeeForm.value.userId)){
+        this.message = "User Id already used";
+        console.log("User Id already used");
+        return;
+      }
       this.generateModel(true);
       this.service.create(this.model).subscribe(
         res =>{
           this.getAll();
           this.initializeFormValue();
-          this.message = "Created Department"
+          this.message = "Created Department";
         }
       )
     }
@@ -148,6 +184,68 @@ export class EmployeeComponent implements OnInit {
   clear(): any{
     this.initializeFormValue();
     this.message = '';
+  }
+
+  getDept(): any{
+    this.deptService.getList().subscribe(
+      res =>{
+        this.deptList = res.content;
+      }
+    )
+  }
+
+  getDesg(): any{
+    this.designationService.getList().subscribe(
+      res =>{
+        this.desgList = res.content;
+      }
+    )
+  }
+
+  /*All Unique validation check function here*/
+  isCodeUnique(code: string): boolean{
+    for(let emp of this.empList){
+      if (emp.code == code){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  isNidUnique(nid: string): boolean{
+    for(let emp of this.empList){
+      if (emp.nid == nid){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  isEmailUnique(email: string): boolean{
+    for(let emp of this.empList){
+      if (emp.email == email){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  isMobileNoUnique(mobileNo: string): boolean{
+    for(let emp of this.empList){
+      if (emp.mobileNo == mobileNo){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  isUserIdUnique(userId: number): boolean{
+    for(let emp of this.empList){
+      if (emp.userId == userId){
+        return false;
+      }
+    }
+    return true;
   }
 
 }

@@ -34,17 +34,7 @@ export class DesignationComponent implements OnInit {
       {
         id: [],
         name: ['', [Validators.required]],
-        active: ['true', Validators.required],
-      }
-    )
-  }
-
-  edit(row: Designation): any {
-    this.designationForm = this.formBuilder.group(
-      {
-        id: [row.id],
-        name: [row.name, [Validators.required]],
-        active: [row.active, [Validators.required]],
+        active: [false, Validators.required],
       }
     )
   }
@@ -59,6 +49,17 @@ export class DesignationComponent implements OnInit {
     this.model.name = this.designationForm.value.name;
     this.model.active = this.designationForm.value.active;
   }
+
+  edit(row: Designation): any {
+    this.designationForm = this.formBuilder.group(
+      {
+        id: [row.id],
+        name: [row.name, [Validators.required]],
+        active: [row.active, [Validators.required]],
+      }
+    )
+  }
+
 
   getAll(): any {
     this.service.getList().subscribe(
@@ -80,6 +81,10 @@ export class DesignationComponent implements OnInit {
         console.log(error);
       });
     } else {
+      if(!this.isNameUnique(this.designationForm.value.name)){
+        this.message = "Designation name already exits..!";
+        console.log("Designation name already exits..!");
+      }
       this.generateModel(true);
       this.service.create(this.model).subscribe(res => {
         this.getAll();
@@ -108,4 +113,14 @@ export class DesignationComponent implements OnInit {
     this.initializeFormValue();
     this.message = "";
   }
+
+  isNameUnique(name: string): boolean{
+    for (let desg of this.desgList) {
+      if (desg.name == name) {
+        return false;
+      }
+    }
+    return true
+  }
+
 }

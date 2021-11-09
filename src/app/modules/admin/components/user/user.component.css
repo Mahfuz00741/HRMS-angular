@@ -1,6 +1,18 @@
 .div-section{
   width: 100%;
   float: left;
+  color: navajowhite;
+  background: darkolivegreen;
+}
+
+.section h6{
+  background: darkolivegreen;
+  color: navajowhite;
+  text-align: center;
+}
+
+.div-section h6{
+  text-align: center;
 }
 
 table {
@@ -13,4 +25,30 @@ th:last-child, td:last-child {
 
 th:nth-child(3), td:nth-child(3){
   width: 10%;
+}
+
+.navbar-brand{
+  background: darkslategray;
+  width: 15%;
+  text-align: center;
+  font-weight: 500;
+}
+
+.modify{
+  background: darkslategray;
+}
+.modify ul li a{
+  color: white;
+}
+
+.modify ul li a:hover{
+  color: black;
+  background: forestgreen;
+}
+
+.logout{
+  color:white;
+}
+.logout:hover{
+  color: indianred;
 }

@@ -1,3 +1,36 @@
+<!--navigation bar-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand">TIME&LEAVE</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse modify" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/admin/user">User</a>
+      </li>
+      <li class="nav-item">
+      <li class="nav-item">
+        <a class="nav-link" href="/hr">HR</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/tnl">TNL</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <a class="nav-link logout" routerLink="/">Logout</a>
+    </form>
+  </div>
+</nav>
+<!--/navigation bar-->
+
 <div *ngIf="message">
   <p>
     <ngb-alert [dismissible]="false">
@@ -8,7 +41,7 @@
 
 
 <div class="section">
-  <h6>Department Form</h6>
+  <h6>Employee Creation Form</h6>
 
   <form [formGroup]="employeeForm" (ngSubmit)=" submit()">
 
@@ -34,52 +67,67 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Date Of Birth</mat-label>
-      <input formControlName="dob" matInput>
+      <input type="date" formControlName="dob" matInput>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Date Of Join</mat-label>
-      <input formControlName="doj" matInput>
+      <input type="date" formControlName="doj" matInput>
     </mat-form-field>
     <mat-form-field>
       <mat-label>NID</mat-label>
       <input formControlName="nid" matInput>
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Gender</mat-label>
-      <input formControlName="gender" matInput>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Choose Gender...</mat-label>
+      <mat-select formControlName="gender">
+        <mat-option [value]="gender" *ngFor="let gender of genders">{{gender}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Email</mat-label>
-      <input formControlName="email" matInput>
+      <input type="email" formControlName="email" matInput>
     </mat-form-field>
     <mat-form-field>
       <mat-label>MobileNo</mat-label>
       <input formControlName="mobileNo" matInput>
     </mat-form-field>
-    <mat-checkbox formControlName="active">Active</mat-checkbox><br/>
+    <mat-checkbox formControlName="active">Active</mat-checkbox>
+    <br/>
     <mat-form-field>
       <mat-label>User Id</mat-label>
-      <input formControlName="userId" matInput>
+      <input type="number" formControlName="userId" matInput placeholder="Input number">
     </mat-form-field>
+
     <mat-form-field>
-      <mat-label>Department Id</mat-label>
-      <input formControlName="deptId" matInput>
+      <mat-label>Department</mat-label>
+      <mat-select formControlName="deptId">
+        <mat-option *ngFor="let dept of deptList" [value]="dept.id">{{dept.name}}</mat-option>
+      </mat-select>
     </mat-form-field>
+
     <mat-form-field>
-      <mat-label>Designation Id</mat-label>
-      <input formControlName="desgId" matInput>
+      <mat-label>Designation</mat-label>
+      <mat-select formControlName="desgId">
+        <mat-option *ngFor="let desg of desgList" [value]="desg.id">{{desg.name}}</mat-option>
+      </mat-select>
     </mat-form-field>
+
     <mat-form-field>
-      <mat-label>Supervisor Id</mat-label>
-      <input formControlName="supervisorId" matInput>
+      <mat-label>Supervisor</mat-label>
+      <mat-select formControlName="supervisorId">
+        <mat-option *ngFor="let emp of empList" [value]="emp.id">{{emp.name}}</mat-option>
+      </mat-select>
     </mat-form-field>
     <button type="submit" [disabled]="!employeeForm.valid" mat-raised-button color="primary">Submit</button>
-    <button type="button" (click)="clear()" mat-stroked-button color="accent"mat-stroked-button color="accent">Clear</button>
+    <button type="button" (click)="clear()" mat-stroked-button color="accent" mat-stroked-button color="accent">Clear
+    </button>
   </form>
 </div>
 <br>
 
-<div class="section">
+<div class="section list">
   <h6>Employee List</h6>
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -96,9 +144,9 @@
       <th mat-header-cell *matHeaderCellDef> Name</th>
       <td mat-cell *matCellDef="let row"> {{row.name}} </td>
     </ng-container>
-    <ng-container matColumnDef="fatherName">
-      <th mat-header-cell *matHeaderCellDef> Father Name</th>
-      <td mat-cell *matCellDef="let row"> {{row.fatherName}} </td>
+    <ng-container matColumnDef="userId">
+      <th mat-header-cell *matHeaderCellDef> User Id</th>
+      <td mat-cell *matCellDef="let row"> {{row.userId}} </td>
     </ng-container>
     <ng-container matColumnDef="dob">
       <th mat-header-cell *matHeaderCellDef> DateOfBirth</th>
@@ -131,10 +179,11 @@
 
     <!-- Action Column-->
     <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <th mat-header-cell *matHeaderCellDef> Action</th>
       <td mat-cell *matCellDef="let row">
 
-        <button (click)="edit(row)" mat-fab color="accent" aria-label="Example icon button with a edit icon a edit icon a edit icon">
+        <button (click)="edit(row)" mat-fab color="accent"
+                aria-label="Example icon button with a edit icon a edit icon a edit icon">
           <mat-icon>edit</mat-icon>
         </button>
 
