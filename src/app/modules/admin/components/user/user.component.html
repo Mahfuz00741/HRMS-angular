@@ -16,10 +16,13 @@
       </li>
       <li class="nav-item">
       <li class="nav-item">
-        <a class="nav-link" href="/hr">HR</a>
+        <a class="nav-link" routerLink="/hr">HR</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/tnl">TNL</a>
+        <a class="nav-link" routerLink="/tnl">TNL</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/report">Report</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
@@ -37,6 +40,10 @@
       <strong>{{message}}</strong>
     </ngb-alert>
   </p>
+</div>
+
+<div class="menu">
+  <a routerLink="/admin/user">User</a>
 </div>
 
 <div class="section">
@@ -70,7 +77,7 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Password</mat-label>
-      <input formControlName="password" matInput>
+      <input type="password" formControlName="password" matInput>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Roles</mat-label>

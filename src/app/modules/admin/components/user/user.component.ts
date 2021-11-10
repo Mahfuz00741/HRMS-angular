@@ -84,6 +84,21 @@ export class UserComponent implements OnInit {
         }
       )
     } else {
+      if (!this.isCodeUnique(this.userForm.value.code)) {
+        this.message = "Code already used";
+        console.log("Code already used");
+        return;
+      }
+      if (!this.isEmailUnique(this.userForm.value.email)) {
+        this.message = "Email already used";
+        console.log("Email already used");
+        return;
+      }
+      if (!this.isMobileNoUnique(this.userForm.value.mobileNo)) {
+        this.message = "Mobile number already used";
+        console.log("Mobile number already used");
+        return;
+      }
       this.generateModel(true);
       this.service.create(this.model).subscribe(
         res => {
@@ -104,7 +119,7 @@ export class UserComponent implements OnInit {
         photo: [row.photo],
         code: [row.code, [Validators.required]],
         name: [row.name, [Validators.required]],
-        email: [row.email, [Validators.required]],
+        email: [row.email, [Validators.required, Validators.email]],
         mobileNo: [row.mobileNo, [Validators.required]],
         password: [row.password, [Validators.required]],
         active: [row.active, [Validators.required]],
@@ -115,6 +130,33 @@ export class UserComponent implements OnInit {
   clear(): any{
     this.initializeFormValue();
     this.message = "";
+  }
+
+  isCodeUnique(code: string): boolean{
+    for(let user of this.userList){
+      if (user.code == code){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  isEmailUnique(email: string): boolean{
+    for(let user of this.userList){
+      if (user.email == email){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  isMobileNoUnique(mobileNo: string): boolean{
+    for(let user of this.userList){
+      if (user.mobileNo == mobileNo){
+        return false;
+      }
+    }
+    return true;
   }
 
 }

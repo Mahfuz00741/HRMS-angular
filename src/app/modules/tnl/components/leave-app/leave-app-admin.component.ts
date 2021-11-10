@@ -3,6 +3,10 @@ import {MatTableDataSource} from "@angular/material/table";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LeaveApp} from "../../models/leaveApp";
 import {LeaveAppService} from "../../services/leave-app.service";
+import {LeaveTypeService} from "../../services/leave-type.service";
+import {LeaveType} from "../../models/leaveType";
+import {EmployeeService} from "../../../hr/services/employee.service";
+import {Employee} from "../../../hr/models/employee";
 
 @Component({
   selector: 'app-leave-app',
@@ -18,18 +22,24 @@ export class LeaveAppAdminComponent implements OnInit {
   leaveAppForm: FormGroup;
   message: string;
   model: LeaveApp = new LeaveApp();
+  status: any = ["APPROVED", "REJECTED", "CANCELLED"];
+  leaveTypeList: LeaveType[] = new Array();
+  empList: Employee[] = new Array();
 
 
   constructor(
     private service: LeaveAppService,
     private formBuilder: FormBuilder,
-  ) {
+    private leaveTypeService: LeaveTypeService,
+    private empService: EmployeeService,
+) {
   }
 
   ngOnInit(): void {
     this.initializeFormValue();
     this.getAll();
-    console.log(this.getAll());
+    this.getLeaveType();
+    this.getEmp();
   }
 
   initializeFormValue(): any {
@@ -125,7 +135,22 @@ export class LeaveAppAdminComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.leaveAppList);
       }
     )
-    console.log(this.dataSource);
+  }
+
+  getLeaveType(): any{
+    this.leaveTypeService.getList().subscribe(
+      res =>{
+        this.leaveTypeList = res.content;
+      }
+    )
+  }
+
+  getEmp(): any{
+    this.empService.getList().subscribe(
+      res => {
+        this.empList = res.content;
+      }
+    )
   }
 
     delete(row: LeaveApp): any {

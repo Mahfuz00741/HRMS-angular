@@ -14,13 +14,11 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatSelectModule} from "@angular/material/select";
-import { IndexComponent } from './components/index/index.component';
 
 
 @NgModule({
   declarations: [
     DesignationComponent,
-    IndexComponent
   ],
   imports: [
     CommonModule,

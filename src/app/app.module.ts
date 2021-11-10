@@ -26,6 +26,7 @@ import {LoginComponent} from "./components/login/login.component";
 import {RegistrationComponent} from "./components/registration/registration.component";
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
+import { ReportComponent } from './modules/report/components/report/report.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {MatSelectModule} from "@angular/material/select";
     LoginComponent,
     UserComponent,
     RegistrationComponent,
+    ReportComponent,
   ],
   imports: [
     BrowserModule,

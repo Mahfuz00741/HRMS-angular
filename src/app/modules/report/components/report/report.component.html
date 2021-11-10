@@ -1,0 +1,103 @@
+<!--navigation bar-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">TIME&LEAVE</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse modify" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/admin/user">User</a>
+      </li>
+      <li class="nav-item">
+      <li class="nav-item">
+        <a class="nav-link" href="/hr">HR</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/tnl">TNL</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <a class="nav-link logout" routerLink="/">Logout</a>
+    </form>
+  </div>
+</nav>
+<!--/navigation bar-->
+
+<div class="div-section section">
+
+  <div class="section-header">
+    <h6>Report</h6>
+  </div>
+
+  <form class="form" [formGroup]="reportForm">
+    <!--    formControlName="params"    formControlName="format"  formControlName="name"-->
+
+    <mat-form-field>
+      <mat-label>Format</mat-label>
+      <mat-select formControlName="format">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let report_format of reportFormat" [value]="report_format">{{report_format}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <mat-select formControlName="name" (selectionChange)="onNameChange()">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let report_name of reportName" [value]="report_name">{{report_name.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    &nbsp;
+    <!--div 1-->
+    <div class="dept" *ngIf="dropdownSelectValue && dropdownSelectValue.id === 1">
+      <mat-form-field>
+        <mat-label>DEPT_ID</mat-label>
+        <input type="number" formControlName="department" matInput>
+      </mat-form-field>
+    </div>
+    <!-- // div 1-->
+
+    &nbsp;
+    <!--div 2-->
+    <div class="desg" *ngIf="dropdownSelectValue && dropdownSelectValue.id === 2">
+      <mat-form-field>
+        <mat-label>DESG_ID</mat-label>
+        <input type="number" formControlName="designation" matInput>
+      </mat-form-field>
+    </div>
+    <!-- // div 2-->
+    &nbsp;
+    <!--div 3-->
+    <div class="leaveApp" *ngIf="dropdownSelectValue && dropdownSelectValue.id === 3">
+      <mat-form-field>
+        <mat-label>DEPT_ID</mat-label>
+        <input type="number" formControlName="department" matInput>
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field>
+        <mat-label>From Date</mat-label>
+        <input type="date" formControlName="fromDate" matInput>
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field>
+        <mat-label>To Date</mat-label>
+        <input type="date" formControlName="toDate" matInput>
+      </mat-form-field>
+      <br/>
+    </div>
+    <!-- // div 3-->
+
+    <button type="button" (click)="printReport()" mat-stroked-button color="accent">Report</button>
+    <br/>
+  </form>
+
+</div>

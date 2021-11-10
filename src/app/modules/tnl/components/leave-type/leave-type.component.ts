@@ -67,6 +67,10 @@ export class LeaveTypeComponent implements OnInit {
         }
       )
     } else {
+      /*if (!this.isNameUnique(this.leaveTypeForm.value.name)){
+        this.message = "Leave Type already exits..!";
+        console.log("Leave Type already exits..!");
+      }*/
       this.generateModel(true);
       this.service.create(this.model).subscribe(
         res => {
@@ -113,4 +117,14 @@ export class LeaveTypeComponent implements OnInit {
     this.initializeFormValue();
     this.message = '';
   }
+
+  /*isNameUnique(name: string): boolean{
+    for(let type of this.leaveTypeList){
+      if (type.name == name){
+        return false;
+      }
+    }
+    return true;
+  }*/
+
 }

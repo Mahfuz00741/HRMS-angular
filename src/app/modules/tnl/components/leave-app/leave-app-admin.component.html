@@ -1,6 +1,6 @@
 <!--navigation bar-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">TIME&LEAVE</a>
+  <a class="navbar-brand">TIME&LEAVE</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -9,17 +9,20 @@
   <div class="collapse navbar-collapse modify" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/admin/user">User</a>
+        <a class="nav-link" routerLink="/admin/user">User</a>
       </li>
       <li class="nav-item">
       <li class="nav-item">
-        <a class="nav-link" href="/hr">HR</a>
+        <a class="nav-link" routerLink="/hr">HR</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/tnl">TNL</a>
+        <a class="nav-link" routerLink="/tnl">TNL</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/report">Report</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
@@ -39,8 +42,13 @@
   </p>
 </div>
 
+<div class="menu">
+  <a routerLink="/tnl">Leave Type</a>
+  <a routerLink="/leaveAppAdmin">Leave Application</a>
+</div>
+
 <div class="section">
-  <h6>Leave Application Creation Form</h6>
+  <h6>Leave Application Creation Form for Admin</h6>
 
   <form [formGroup]="leaveAppForm" (ngSubmit)=" submit()">
 
@@ -72,29 +80,44 @@
       <mat-label>Reason</mat-label>
       <input formControlName="reason" matInput>
     </mat-form-field>
+
     <mat-form-field>
-      <mat-label>Employee Id</mat-label>
-      <input formControlName="employeeId" matInput>
+      <mat-label>Employee</mat-label>
+      <mat-select formControlName="employeeId">
+        <mat-option *ngFor="let emp of empList" [value]="emp.id">{{emp.name}}</mat-option>
+      </mat-select>
     </mat-form-field>
+
+
     <mat-form-field>
-      <mat-label>Leave Type Id</mat-label>
-      <input formControlName="leaveTypeId" matInput>
+      <mat-label>Leave Type</mat-label>
+      <mat-select formControlName="leaveTypeId">
+        <mat-option *ngFor="let leaveType of leaveTypeList" [value]="leaveType.id">{{leaveType.name}}</mat-option>
+      </mat-select>
     </mat-form-field>
+
     <mat-form-field>
       <mat-label>On Leave Contact No</mat-label>
       <input formControlName="onLeaveContactNo" matInput>
     </mat-form-field>
+
     <mat-form-field>
-      <mat-label>Responsible Person Id</mat-label>
-      <input formControlName="responsiblePersonId" matInput>
+      <mat-label>Responsible Person</mat-label>
+      <mat-select formControlName="responsiblePersonId">
+        <mat-option *ngFor="let emp of empList" [value]="emp.id">{{emp.name}}</mat-option>
+      </mat-select>
     </mat-form-field>
+
     <mat-form-field>
       <mat-label>Remark</mat-label>
       <input formControlName="remark" matInput>
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Status</mat-label>
-      <input formControlName="status" matInput>
+    <mat-form-field class="example-full-width">
+      <mat-label>Choose Status...</mat-label>
+      <mat-select formControlName="gender">
+        <mat-option [value]="sts" *ngFor="let sts of status">{{sts}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
     <mat-checkbox formControlName="active">Active</mat-checkbox>
     <br/>

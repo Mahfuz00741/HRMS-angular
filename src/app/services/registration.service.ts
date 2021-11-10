@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Registration} from "../models/registration";
+import {RegistrationResponse} from "../models/registrationResponse";
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class RegistrationService {
     private http: HttpClient,
   ) { }
 
-  create(model: Registration): Observable<Registration>{
-    return this.http.post<Registration>(this.API_URL, model);
+  create(model: Registration): Observable<RegistrationResponse>{
+    return this.http.post<RegistrationResponse>(this.API_URL, model);
   }
 
   getList(): Observable<any> {

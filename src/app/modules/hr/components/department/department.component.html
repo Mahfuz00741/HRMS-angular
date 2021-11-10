@@ -12,19 +12,23 @@
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/admin/user">User</a>
+        <a class="nav-link" routerLink="/admin/user">User</a>
       </li>
       <li class="nav-item">
       <li class="nav-item">
-        <a class="nav-link" href="/hr">HR</a>
+        <a class="nav-link" routerLink="/hr">HR</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/tnl">TNL</a>
+        <a class="nav-link" routerLink="/tnl">TNL</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/report">Report</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <a class="nav-link logout" routerLink="/">Logout</a>
     </form>
   </div>
 </nav>
@@ -36,6 +40,12 @@
       <strong>{{message}}</strong>
     </ngb-alert>
   </p>
+</div>
+
+<div class="menu">
+  <a routerLink="/hr">Employee</a>
+  <a routerLink="/dept">Department</a>
+  <a routerLink="/desg">Designation</a>
 </div>
 
 <div class="section">

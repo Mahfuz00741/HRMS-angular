@@ -4,6 +4,7 @@ import {Registration} from "../../models/registration";
 import {RegistrationService} from "../../services/registration.service";
 import {UserService} from "../../modules/admin/services/user.service";
 import {MatTableDataSource} from "@angular/material/table";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-registration',
@@ -22,12 +23,14 @@ export class RegistrationComponent implements OnInit {
     private formBuilder: FormBuilder,
     private service: RegistrationService,
     private userService: UserService,
+    private router: Router,
   ) {
   }
 
   ngOnInit(): void {
     this.initializeFormValue();
     this.getAll();
+    //this.passwordMatch();
   }
 
 
@@ -68,8 +71,8 @@ export class RegistrationComponent implements OnInit {
   submit(): any {
 
     if(!this.isCodeUnique(this.registrationForm.value.code)){
-      this.message = "code no is already used";
-      console.log('code no is already used');
+      this.message = "code is already used";
+      console.log('code is already used');
       return;
     }
 
@@ -84,18 +87,21 @@ export class RegistrationComponent implements OnInit {
       console.log('Mobile no is already used');
       return;
     }
-
     this.generateModel();
     console.log(this.model);
     this.service.create(this.model).subscribe(
       res => {
-        // if(res.status = 'SUCCESS'){
-        //
-        // }
-
-        console.log(res);
-        this.message = "Registration complete";
-        console.log('Registration complete');
+        if (res.status === 'SUCCESS'){
+          console.log('Registration success');
+          this.message = 'Registration success';
+          this.router.navigate(['/']);
+        }else {
+          console.log('Registration unsuccessfully');
+          this.message = 'Registration unsuccessfully';
+        }
+      }, error => {
+        console.log('unable to access data');
+        this.message = 'unable to access data';
       }
     )
 
