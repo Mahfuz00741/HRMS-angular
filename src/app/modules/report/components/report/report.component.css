@@ -1,36 +1,39 @@
 
-.section h6{
+.section h6 {
   background: darkolivegreen;
   color: navajowhite;
   text-align: center;
 }
 
-.navbar-brand{
+.navbar-brand {
   background: darkslategray;
   width: 15%;
   text-align: center;
   font-weight: 500;
 }
 
-.modify{
+.modify {
   background: darkslategray;
 }
-.modify ul li a{
+
+.modify ul li a {
   color: white;
 }
 
-.modify ul li a:hover{
+.modify ul li a:hover {
   color: black;
   background: forestgreen;
 }
 
-.logout{
-  color:white;
+.logout {
+  color: white;
 }
-.logout:hover{
+
+.logout:hover {
   color: indianred;
 }
 
-.form{
-
+.form {
+  margin-left: 450px;
+  margin-top: 100px;
 }
